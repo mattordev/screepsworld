@@ -15,7 +15,7 @@ module.exports.loop = function () {
 
   for (const creepIndex in Game.creeps) {
     const creep = Game.creeps[creepIndex];
-    
+
     const role = require("role." + creep.memory.role.toLowerCase());
     role.run(creep);
 
@@ -88,6 +88,21 @@ module.exports.loop = function () {
 
       if (!(newCreep < 0)) {
         console.log("Spawned new creep: " + name);
+
+        switch (newCreep.memory.role) {
+          case "Harvester":
+            console.log("Num of Harvester:" + numberOfHarvesters);
+            break;
+          case "Upgrader":
+            console.log("Num of Upgrader:" + numberOfUpgraders);
+            break;
+          case "Builder":
+            console.log("Num of Builder:" + numberOfBuilders);
+            break;
+          case "Repairer":
+            console.log("Num of Repairer:" + numberOfRepairers);
+            break;
+        }
       }
     }
   }

@@ -33,21 +33,6 @@ module.exports = function () {
       body.push(MOVE);
     }
 
-    switch (roleName) {
-      case "Harvester":
-        console.log("Num of Harvester:" + numberOfHarvesters);
-        break;
-      case "Upgrader":
-        console.log("Num of Upgrader:" + numberOfUpgraders);
-        break;
-      case "Builder":
-        console.log("Num of Builder:" + numberOfBuilders);
-        break;
-      case "Repairer":
-        console.log("Num of Repairer:" + numberOfRepairers);
-        break;
-    }
-
     return this.spawnCreep(body, creepName, { memory: { role: roleName, working: false } });
   };
 };
