@@ -41,7 +41,6 @@ module.exports = {
           creep.moveTo(droppedEnergy);
         }
       } else if (creep.harvest(closestTarget) == ERR_NOT_IN_RANGE) {
-        console.log(JSON.stringify(droppedEnergy));
         creep.say("harvesting");
         creep.moveTo(closestTarget);
       }
