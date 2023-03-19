@@ -15,6 +15,9 @@ module.exports = {
         (s.structureType == STRUCTURE_SPAWN || s.structureType == STRUCTURE_EXTENSION) && s.energy < s.energyCapacity,
     });
     const closestTarget = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
+    const droppedEnergy = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, {
+      filter: (e) => e.resourceType == RESOURCE_ENERGY,
+    });
 
     // Flip flop logic
     if (creep.memory.working == true && creep.store.energy == 0) {
@@ -33,7 +36,13 @@ module.exports = {
         }
       }
     } else {
-      if (creep.harvest(closestTarget) == ERR_NOT_IN_RANGE) {
+      if (droppedEnergy) {
+        if (creep.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
+          console.log("d");
+          creep.moveTo(droppedEnergy);
+        }
+      } else if (creep.harvest(closestTarget) == ERR_NOT_IN_RANGE) {
+        console.log(JSON.stringify(droppedEnergy));
         creep.say("harvesting");
         creep.moveTo(closestTarget);
       }
